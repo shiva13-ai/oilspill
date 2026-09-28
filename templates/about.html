@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Oil Spill Detection - Marine Environmental Protection</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="oil spill detection, marine environment, satellite imagery, AIS data, environmental protection" name="keywords">
+    <meta content="This platform detects oil spills in marine environments using AIS data and satellite imagery, providing real-time insights to mitigate environmental damage." name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+
+
+<body>
+    <!-- Spinner Start -->
+<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<!-- Spinner End -->
+
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow border-top border-5 border-primary sticky-top p-0">
+    <a href="{{ url_for('index') }}" class="navbar-brand bg-primary d-flex align-items-center px-4 px-lg-5">
+        <h2 class="mb-2 text-white">MarineGuard</h2>
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+            <a href="{{ url_for('index') }}" class="nav-item nav-link">Home</a>
+            <a href="{{ url_for('about') }}" class="nav-item nav-link active">About</a>
+            <a href="{{ url_for('working') }}" class="nav-item nav-link">Services</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                <div class="dropdown-menu fade-up m-0">
+                    <a href="{{ url_for('price') }}" class="dropdown-item">Plan</a>
+                    <a href="{{ url_for('feature') }}" class="dropdown-item">Features</a>
+                </div>
+            </div>
+            <a href="{{ url_for('contact') }}" class="nav-item nav-link">Contact</a>
+        </div>
+    </div>
+</nav>
+<!-- Navbar End -->
+
+
+
+    <!-- Page Header Start -->
+<div class="container-fluid page-header py-5" style="margin-bottom: 6rem;">
+    <div class="container py-5">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">About Oil Spill Detection</h1>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a class="text-white" href="{{ url_for('index') }}">Home</a></li>
+                <li class="breadcrumb-item"><a class="text-white" href="{{ url_for('about') }}">About</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">About Us</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Page Header End -->
+
+
+
+    <!-- About Start -->
+<div class="container-fluid overflow-hidden py-5 px-lg-0">
+    <div class="container about py-5 px-lg-0">
+        <div class="row g-5 mx-lg-0">
+            <div class="col-lg-6 ps-lg-0 wow fadeInLeft" data-wow-delay="0.1s" style="min-height: 400px;">
+                <div class="position-relative h-100">
+                    <img class="position-absolute img-fluid w-100 h-100" src="{{ url_for('static', filename='img/about.jpg') }}" style="object-fit: cover;" alt="Oil Spill Detection">
+                </div>
+            </div>
+            <div class="col-lg-6 about-text wow fadeInUp" data-wow-delay="0.3s">
+                <h6 class="text-secondary text-uppercase mb-3">About Us</h6>
+                <h1 class="mb-5">Advanced Oil Spill Detection System</h1>
+                <p class="mb-5">Our project leverages cutting-edge technology, including satellite imagery, AIS data, and machine learning algorithms to detect and monitor oil spills in real-time. Our solution aims to provide early detection and improve response strategies to mitigate the environmental impact of oil spills.</p>
+                <div class="row g-4 mb-5">
+                    <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
+                        <i class="fa fa-satellite fa-3x text-primary mb-3"></i>
+                        <h5>Satellite Imaging</h5>
+                        <p class="m-0">Using high-resolution SAR (Synthetic Aperture Radar) images to detect oil spill presence and size.</p>
+                    </div>
+                    <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s">
+                        <i class="fa fa-ship fa-3x text-primary mb-3"></i>
+                        <h5>AIS Data Analysis</h5>
+                        <p class="m-0">We integrate AIS data to monitor ship movements and identify potential spill sources in maritime environments.</p>
+                    </div>
+                </div>
+                <a href="" class="btn btn-primary py-3 px-5">Learn More</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+
+
+    <!-- Fact Start -->
+<div class="container-xxl py-5">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="text-secondary text-uppercase mb-3">Some Facts</h6>
+                <h1 class="mb-5">Real-Time Oil Spill Detection at Its Best</h1>
+                <p class="mb-5">Our system provides accurate, timely detection of oil spills using advanced satellite imagery and ship tracking data. By analyzing data from multiple sources, we help in mitigating environmental damage caused by oil spills in marine ecosystems.</p>
+                <div class="d-flex align-items-center">
+                    <i class="fa fa-phone-alt fa-2x flex-shrink-0 bg-primary p-3 text-white"></i>
+                    <div class="ps-4">
+                        <h6>Have any questions?</h6>
+                        <h3 class="text-primary m-0">+012 345 6789</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row g-4 align-items-center">
+                    <div class="col-sm-6">
+                        <div class="bg-primary p-4 mb-4 wow fadeIn" data-wow-delay="0.3s">
+                            <i class="fa fa-globe fa-2x text-white mb-3"></i>
+                            <h2 class="text-white mb-2" data-toggle="counter-up">500+</h2>
+                            <p class="text-white mb-0">Oil Spills Detected</p>
+                        </div>
+                        <div class="bg-secondary p-4 wow fadeIn" data-wow-delay="0.5s">
+                            <i class="fa fa-satellite fa-2x text-white mb-3"></i>
+                            <h2 class="text-white mb-2" data-toggle="counter-up">200+</h2>
+                            <p class="text-white mb-0">Satellite Images Analyzed</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="bg-success p-4 wow fadeIn" data-wow-delay="0.7s">
+                            <i class="fa fa-users fa-2x text-white mb-3"></i>
+                            <h2 class="text-white mb-2" data-toggle="counter-up">100+</h2>
+                            <p class="text-white mb-0">Partners & Organizations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fact End -->
+
+
+    <!-- Feature Start -->
+<div class="container-fluid overflow-hidden py-5 px-lg-0">
+    <div class="container feature py-5 px-lg-0">
+        <div class="row g-5 mx-lg-0">
+            <div class="col-lg-6 feature-text wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="text-secondary text-uppercase mb-3">Our Features</h6>
+                <h1 class="mb-5">Real-Time Oil Spill Detection and Response</h1>
+                <div class="d-flex mb-5 wow fadeInUp" data-wow-delay="0.3s">
+                    <i class="fa fa-globe text-primary fa-3x flex-shrink-0"></i>
+                    <div class="ms-4">
+                        <h5>Global Coverage</h5>
+                        <p class="mb-0">We monitor oceans worldwide, providing continuous oil spill detection using satellite imagery and ship tracking data.</p>
+                    </div>
+                </div>
+                <div class="d-flex mb-5 wow fadeIn" data-wow-delay="0.5s">
+                    <i class="fa fa-rocket text-primary fa-3x flex-shrink-0"></i>
+                    <div class="ms-4">
+                        <h5>Advanced Detection Technology</h5>
+                        <p class="mb-0">Our AI-driven system processes satellite SAR imagery, delivering accurate spill predictions and minimizing environmental impact.</p>
+                    </div>
+                </div>
+                <div class="d-flex mb-0 wow fadeInUp" data-wow-delay="0.7s">
+                    <i class="fa fa-headphones text-primary fa-3x flex-shrink-0"></i>
+                    <div class="ms-4">
+                        <h5>24/7 Monitoring</h5>
+                        <p class="mb-0">Our team is always on standby, ensuring quick responses to any detected spills to protect marine ecosystems.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 pe-lg-0 wow fadeInRight" data-wow-delay="0.1s" style="min-height: 400px;">
+                <div class="position-relative h-100">
+                    <img class="position-absolute img-fluid w-100 h-100" src="{{ url_for('static', filename='img/feature.jpg') }}" style="object-fit: cover;" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Feature End -->        
+
+    <!-- Footer Start -->
+<div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-lg-3 col-md-6">
+                <h4 class="text-light mb-4">Contact Us</h4>
+                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Your Company Address</p>
+                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+123 456 7890</p>
+                <p class="mb-2"><i class="fa fa-envelope me-3"></i>contact@oildetection.com</p>
+                <div class="d-flex pt-2">
+                    <a class="btn btn-outline-light btn-social" href="https://twitter.com/yourcompany"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-light btn-social" href="https://facebook.com/yourcompany"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light btn-social" href="https://linkedin.com/company/yourcompany"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h4 class="text-light mb-4">Quick Links</h4>
+                <a class="btn btn-link" href="{{ url_for('about') }}">About Us</a>
+                <a class="btn btn-link" href="{{ url_for('contact') }}">Contact Us</a>
+                <a class="btn btn-link" href="{{ url_for('working') }}">Our Services</a>
+                <a class="btn btn-link" href="/terms-conditions">Terms & Conditions</a>
+                <a class="btn btn-link" href="/support">Support</a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h4 class="text-light mb-4">Our Services</h4>
+                <a class="btn btn-link" href="/oil-spill-detection">Oil Spill Detection</a>
+                <a class="btn btn-link" href="/data-analysis">Data Analysis</a>
+                <a class="btn btn-link" href="/satellite-monitoring">Satellite Monitoring</a>
+                <a class="btn btn-link" href="/real-time-monitoring">Real-Time Monitoring</a>
+                <a class="btn btn-link" href="/consultancy">Consultancy</a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h4 class="text-light mb-4">Newsletter</h4>
+                <p>Stay updated with our latest findings and technologies in oil spill detection.</p>
+                <div class="position-relative mx-auto" style="max-width: 400px;">
+                    <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="email" placeholder="Your email" required>
+                    <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="copyright">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    &copy; <a class="border-bottom" href="#">Oil Spill Detection</a>, All Rights Reserved.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-0 back-to-top" id="back-to-top">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow.js/1.1.2/wow.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- For visualizing oil spill detection data -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> <!-- For maps and location-based features -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- For custom alerts (e.g., detection success/failure) -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- For API requests, e.g., fetching satellite data or AIS data -->
+    <!-- Template Javascript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

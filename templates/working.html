@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploading & Reading CSV file</title>
+    <!-- Linking Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background-color: #FF3E41!important;
+            height: 75px;
+        }
+
+        .navbar-brand, .nav-link {
+            color: #fff !important;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            text-decoration: underline;
+            color: #f39c12 !important;
+        }
+
+        .upload-container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px #51CFED;
+            text-align: center;
+            margin-top: 5rem;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .upload-container input[type="file"] {
+            margin-bottom: 1rem;
+        }
+
+        .upload-container .btn {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #51CFED;
+            color:black;
+        }
+
+        .upload-container .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px #51CFED;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 1rem;
+            text-align: center;
+            background-color: #FF3E41;
+            color: white;
+        }
+
+        @media (max-width: 576px) {
+            .upload-container {
+                padding: 1rem;
+                margin-top: 2rem;
+            }
+
+            .upload-container h2 {
+                font-size: 1.5rem;
+            }
+
+            .upload-container .btn {
+                font-size: 0.9rem;
+            }
+
+            .navbar-brand {
+                font-size: 1rem;
+            }
+
+            .nav-link {
+                font-size: 0.9rem;
+            }
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <h2 class="navbar-brand">MarineGuard</h2>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav" style="margin-right: 50px; font-size: 15px;">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('index') }}" style="font-size:100;">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('about') }}">ABOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contact') }}">CONTACT</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Upload Form Container -->
+    <div class="container d-flex justify-content-center">
+        <div class="upload-container">
+            <h2 class="mb-4">Upload Your CSV File</h2>
+            <form method="POST" enctype="multipart/form-data" action="/uploadFile">
+                <input type="file" name="file" accept=".csv" class="form-control mb-3">
+                <input type="submit" value="Upload" class="btn btn-primary w-100">
+            </form>
+            <p class="text-muted mt-3">Choose a CSV file to upload for processing.</p>
+            <form action="/show_data" target="_blank">
+                <input type="submit" value="Show CSV" class="btn btn-secondary w-100">
+            </form>
+        </div>
+    </div>
+
+    <!-- Number Input Form -->
+    <div class="container mt-4">
+        <form action="/uploadFile" method="POST">
+            <div class="input-container">
+                <label for="numberInput">Enter a Number:</label><br>
+                <input type="number" id="numberInput" name="number" class="form-control" required><br>
+                <input type="submit" value="Submit" class="btn btn-success w-100">
+            </div>
+        </form>
+    </div>
+
+    <!-- Outlier Data Table -->
+    <div class="container mt-4">
+        {% if result %}
+            {% if result['SOG_Outliers'] is not none and result['SOG_Outliers'].shape[0] > 0 %}
+                <h3>SOG Outliers:</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>LON</th>
+                            <th>LAT</th>
+                            <th>BaseDateTime</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for _, row in result['SOG_Outliers'].iterrows() %}
+                            <tr>
+                                <td>{{ row['LON'] }}</td>
+                                <td>{{ row['LAT'] }}</td>
+                                <td>{{ row['BaseDateTime'] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+
+            {% if result['COG_Outliers'] is not none and result['COG_Outliers'].shape[0] > 0 %}
+                <h3>COG Outliers:</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>LON</th>
+                            <th>LAT</th>
+                            <th>BaseDateTime</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for _, row in result['COG_Outliers'].iterrows() %}
+                            <tr>
+                                <td>{{ row['LON'] }}</td>
+                                <td>{{ row['LAT'] }}</td>
+                                <td>{{ row['BaseDateTime'] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 MarineGuard | All Rights Reserved</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
